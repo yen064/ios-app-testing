@@ -13,7 +13,7 @@
 
 ## 這個 App 的用途
 
-搭配 [`../../cross-webpage-and-app-testing/`](../../cross-webpage-and-app-testing/) 這個網頁，示範「Safari 網頁 → 喚起 iOS App → 回到 Safari」的跨網頁與 App 溝通流程：
+搭配 [`../../pages/cross-webpage-and-app-testing/`](../../pages/cross-webpage-and-app-testing/) 這個網頁，示範「Safari 網頁 → 喚起 iOS App → 回到 Safari」的跨網頁與 App 溝通流程：
 
 1. 網頁（發布於 GitHub Pages）上有個「開啟 App」按鈕，點擊後導向
    `crosswebapp://open?returnURL=<目前網頁網址 URL-encoded>`。

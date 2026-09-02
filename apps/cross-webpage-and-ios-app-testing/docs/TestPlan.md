@@ -45,7 +45,7 @@
 ### TC-003 / TC-004：完整跨 App 流程
 
 **前置條件**：
-- `cross-webpage-and-app-testing/` 網頁已發布到 GitHub Pages。
+- `pages/cross-webpage-and-app-testing/` 網頁已發布到 GitHub Pages。
 - 本 App 已透過 Xcode 或 `run_tests.sh` build 過一次到目標模擬器／裝置（系統才會註冊 `crosswebapp://` scheme）。
 
 **步驟**：
