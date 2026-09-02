@@ -5,8 +5,8 @@
 
 ## 內容
 
-- `cross-webpage-and-app-testing.htm` / `style.css` / `app.js`：純靜態網頁，無建置流程，直接發布即可。
-  - 這三個檔案放在自己專屬的 `pages/cross-webpage-and-app-testing/` 子資料夾下，是為了讓 `app.js`、`style.css` 這類通用檔名不會跟 `pages/` 底下其他頁面的同名檔案衝突；主頁面也故意不叫 `index.html`，讓網址更清楚地指出這是哪個頁面。
+- `index.htm` / `style.css` / `app.js`：純靜態網頁，無建置流程，直接發布即可。
+  - 這三個檔案放在自己專屬的 `pages/cross-webpage-and-app-testing/` 子資料夾下，是為了讓 `app.js`、`style.css` 這類通用檔名不會跟 `pages/` 底下其他頁面的同名檔案衝突。主頁面叫 `index.htm`（而非 `index.html`）是刻意的：GitHub Pages 只會自動把 `index.html` 當成資料夾預設首頁，用 `.htm` 可以避免瀏覽該子資料夾網址時被當成目錄首頁直接服務，網址上仍需帶完整檔名。
 - 頁面上的「開啟 App」按鈕會導向 `crosswebapp://open?returnURL=<目前網頁網址>`，
   喚起已安裝的 `cross-webpage-and-ios-app-testing` App；App 內的「回到網頁」按鈕會用
   `canOpenURL` + `openURL` 開回這個 `returnURL`。
@@ -25,7 +25,7 @@ git subtree push --prefix pages origin gh-pages
 把 Source 設定為 `gh-pages` branch（`/ (root)`）。之後網頁會發布在：
 
 ```
-https://<github-username>.github.io/<repo-name>/cross-webpage-and-app-testing/cross-webpage-and-app-testing.htm
+https://<github-username>.github.io/<repo-name>/cross-webpage-and-app-testing/index.htm
 ```
 
 ## 本機預覽
@@ -33,7 +33,7 @@ https://<github-username>.github.io/<repo-name>/cross-webpage-and-app-testing/cr
 ```bash
 cd pages
 python3 -m http.server 8000
-# 瀏覽器開啟 http://localhost:8000/cross-webpage-and-app-testing/cross-webpage-and-app-testing.htm
+# 瀏覽器開啟 http://localhost:8000/cross-webpage-and-app-testing/index.htm
 ```
 
 注意：Custom URL Scheme 喚起 App 需要在真正的 Safari（模擬器或實機）上測試，
