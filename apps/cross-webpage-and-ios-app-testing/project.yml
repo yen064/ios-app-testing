@@ -1,0 +1,83 @@
+name: CrossWebAppTesting
+options:
+  bundleIdPrefix: com.aaronyen
+  deploymentTarget:
+    iOS: "16.0"
+  developmentLanguage: zh-Hant
+
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+
+targets:
+  CrossWebAppTesting:
+    type: application
+    platform: iOS
+    sources:
+      - path: CrossWebAppTesting
+    resources:
+      - path: CrossWebAppTesting/Resources
+    info:
+      path: CrossWebAppTesting/Info.plist
+      properties:
+        UILaunchStoryboardName: LaunchScreen
+        UIMainStoryboardFile: Main
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneConfigurationName: Default Configuration
+                UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
+                UISceneStoryboardFile: Main
+        CFBundleURLTypes:
+          - CFBundleURLName: com.aaronyen.crosswebapptesting
+            CFBundleURLSchemes:
+              - crosswebapp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aaronyen.crosswebapptesting
+        TARGETED_DEVICE_FAMILY: "1"
+
+  CrossWebAppTestingTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: CrossWebAppTestingTests
+    dependencies:
+      - target: CrossWebAppTesting
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aaronyen.crosswebapptesting.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+  CrossWebAppTestingUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: CrossWebAppTestingUITests
+    dependencies:
+      - target: CrossWebAppTesting
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aaronyen.crosswebapptesting.uitests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  CrossWebAppTesting:
+    build:
+      targets:
+        CrossWebAppTesting: all
+        CrossWebAppTestingTests: [test]
+        CrossWebAppTestingUITests: [test]
+    test:
+      targets:
+        - CrossWebAppTestingTests
+        - CrossWebAppTestingUITests
+      gatherCoverageData: true

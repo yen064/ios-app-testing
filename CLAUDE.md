@@ -49,6 +49,7 @@ ios-app-testing/
 | App | 資料夾 | 平台 | UI 框架 | 說明 |
 |---|---|---|---|---|
 | TWQR AIO Testing | `apps/twqr-aio-testing/` | iOS (iPhone) | UIKit | 詳見 [apps/twqr-aio-testing/CLAUDE.md](apps/twqr-aio-testing/CLAUDE.md) |
+| Cross Web App Testing | `apps/cross-webpage-and-ios-app-testing/` | iOS (iPhone) | UIKit | 搭配 [`cross-webpage-and-app-testing/`](cross-webpage-and-app-testing/) 網頁測試跨網頁與 App 溝通流程，詳見 [apps/cross-webpage-and-ios-app-testing/CLAUDE.md](apps/cross-webpage-and-ios-app-testing/CLAUDE.md) |
 
 ## 環境需求
 
