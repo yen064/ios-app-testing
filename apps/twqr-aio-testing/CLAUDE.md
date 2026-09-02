@@ -61,8 +61,9 @@ cd apps/twqr-aio-testing
 ## 目前狀態
 
 - 主畫面（`ViewController`）為 `WKWebView`，App 啟動後直接載入網址。
-  - 目前是預留位置網址 `https://www.apple.com`（見 `ViewController.swift` 內的 `targetURL`），待實際要串的網址確定後更新。
+  - 目前載入的是指定的贊助頁面（見 `ViewController.swift` 內的 `targetURL`），之後若要換成其他頁面直接更新這個常數即可。
   - `webView` 有設定 `accessibilityIdentifier`，UI test 用這個 identifier 確認 WebView 有正常顯示。
+  - `ViewController` 實作 `WKNavigationDelegate`，攔截每一次導覽（包含使用者點擊頁面上的連結）並用 `os.log`（`Logger`，subsystem `com.aaronyen.twqraiotesting`, category `WebView`）記錄導覽類型與目標網址，目前一律 `decisionHandler(.allow)` 放行，不做攔截或改寫。可用 Console.app 或 `xcrun simctl spawn <device> log stream --predicate 'subsystem == "com.aaronyen.twqraiotesting"'` 即時查看。
 - 已驗證：`xcodegen generate` 可成功產生專案、`build-for-testing` 編譯成功、`run_tests.sh` 執行 Unit + UI 測試皆通過。
 - 尚未串接任何 TWQR 相關實際功能（例如掃碼、支付整合等），待需求明確後於本文件補充「功能模組」與對應測試案例。
 
