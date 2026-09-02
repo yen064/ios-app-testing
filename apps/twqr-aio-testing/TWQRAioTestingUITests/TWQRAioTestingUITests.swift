@@ -6,11 +6,11 @@ final class TWQRAioTestingUITests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testAppLaunchesAndShowsTitle() throws {
+    func testAppLaunchesAndShowsWebView() throws {
         let app = XCUIApplication()
         app.launch()
 
-        let titleLabel = app.staticTexts["titleLabel"]
-        XCTAssertTrue(titleLabel.waitForExistence(timeout: 5))
+        let webView = app.webViews["webView"]
+        XCTAssertTrue(webView.waitForExistence(timeout: 10))
     }
 }

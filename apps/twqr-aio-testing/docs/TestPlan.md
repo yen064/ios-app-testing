@@ -34,7 +34,7 @@
 
 | ID | 名稱 | 類型 | 狀態 | 對應測試 |
 |---|---|---|---|---|
-| TC-001 | App 可正常啟動並顯示主畫面標題 | 自動化 (UI) | ✅ 已建立 | `TWQRAioTestingUITests.testAppLaunchesAndShowsTitle` |
+| TC-001 | App 可正常啟動並顯示 WebView | 自動化 (UI) | ✅ 已建立 | `TWQRAioTestingUITests.testAppLaunchesAndShowsWebView` |
 | TC-002 | 主畫面 ViewController 可正常載入 | 自動化 (Unit) | ✅ 已建立 | `TWQRAioTestingTests.testViewControllerLoadsWithoutCrashing` |
 
 ## 手動測試案例
@@ -43,5 +43,5 @@
 
 ## 已知限制 / 待辦
 
-- 目前僅有骨架畫面（顯示標題文字），尚未串接實際 TWQR 相關功能。
+- 主畫面為 WKWebView，目前載入預留位置網址（`https://www.apple.com`），待實際要串接的網址確定後於 `ViewController.swift` 更新。
 - 尚未設定 CI（如 GitHub Actions / Xcode Cloud）自動跑測試，待專案功能明確後補上。

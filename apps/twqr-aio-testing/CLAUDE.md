@@ -60,7 +60,9 @@ cd apps/twqr-aio-testing
 
 ## 目前狀態
 
-- 已建立最小可執行骨架：App 啟動後顯示標題文字 "TWQR AIO Testing"。
+- 主畫面（`ViewController`）為 `WKWebView`，App 啟動後直接載入網址。
+  - 目前是預留位置網址 `https://www.apple.com`（見 `ViewController.swift` 內的 `targetURL`），待實際要串的網址確定後更新。
+  - `webView` 有設定 `accessibilityIdentifier`，UI test 用這個 identifier 確認 WebView 有正常顯示。
 - 已驗證：`xcodegen generate` 可成功產生專案、`build-for-testing` 編譯成功、`run_tests.sh` 執行 Unit + UI 測試皆通過。
 - 尚未串接任何 TWQR 相關實際功能（例如掃碼、支付整合等），待需求明確後於本文件補充「功能模組」與對應測試案例。
 
