@@ -64,6 +64,12 @@ cd apps/twqr-aio-testing
   - 目前載入的是指定的贊助頁面（見 `ViewController.swift` 內的 `targetURL`），之後若要換成其他頁面直接更新這個常數即可。
   - `webView` 有設定 `accessibilityIdentifier`，UI test 用這個 identifier 確認 WebView 有正常顯示。
   - `ViewController` 實作 `WKNavigationDelegate`，攔截每一次導覽（包含使用者點擊頁面上的連結）並用 `os.log`（`Logger`，subsystem `com.aaronyen.twqraiotesting`, category `WebView`）記錄導覽類型與目標網址，目前一律 `decisionHandler(.allow)` 放行，不做攔截或改寫。可用 Console.app 或 `xcrun simctl spawn <device> log stream --predicate 'subsystem == "com.aaronyen.twqraiotesting"'` 即時查看。
+  - `ViewController` 也實作 `WKUIDelegate`（`createWebViewWith`），把網頁用 `target="_blank"` / `window.open()` 開新視窗的請求改成在同一個 WebView 內導覽，避免點了沒反應（`WKWebView` 預設不處理開新視窗請求，不接的話畫面會像卡住）。
+    - 例外：App Store 連結（host 為 `apps.apple.com`）不會塞進我們的 WebView，而是直接用 `UIApplication.shared.open()` 交給系統開啟 App Store app。
+  - `decidePolicyFor navigationAction` 會檢查目標網址的 scheme，遇到非 `http`/`https` 的 scheme（例如 `itms-apps://`、`itms-appss://` 這類 App Store 深連結，或 `tel:`、`mailto:` 等）一律 `decisionHandler(.cancel)` 並改用 `UIApplication.shared.open()` 交給系統處理。
+    - 背景：贊助頁面裡有連到 App Store（`apps.apple.com/.../ipass-money`）的連結，Apple 的網頁版 App Store 頁面本身載入後會自動再導向 `itms-appss://` 想喚起原生 App Store，但 `WKWebView` 無法導覽非 http(s) scheme，沒攔截的話會直接失敗（WebKit 錯誤：`Redirection to URL with a scheme that is not HTTP(S)`，Console 也會看到系統的 `SOAuthorizationCoordinator::tryAuthorize` 相關訊息）。加上這個攔截後，不管連結是不是 App Store，只要目標是非 http(s) scheme 都會直接交給系統處理，不會讓 WebView 嘗試導覽而失敗。
+  - 已知系統 log：點擊連結時 Console 可能出現 `SOAuthorizationCoordinator::tryAuthorize (2): Attempting to perform subframe navigation.`，這是系統層級（AuthKit）針對頁面內嵌的第三方 iframe（此頁面含 Facebook Like 外掛的 iframe，以及前述 App Store 連結的自動跳轉）印出的資訊性訊息，本身不是錯誤。
+  - ⚠️ 這個贊助頁面是真實金流（歐付寶），實測與除錯時要注意**不要真的按到最終送出付款/選擇付款方式的按鈕**，避免產生非預期的真實交易。
 - 已驗證：`xcodegen generate` 可成功產生專案、`build-for-testing` 編譯成功、`run_tests.sh` 執行 Unit + UI 測試皆通過。
 - 尚未串接任何 TWQR 相關實際功能（例如掃碼、支付整合等），待需求明確後於本文件補充「功能模組」與對應測試案例。
 
