@@ -1,0 +1,16 @@
+# Xcode
+*.xcodeproj/
+!default.xcworkspace
+xcuserdata/
+DerivedData/
+.build/
+
+# XcodeGen 產物 (由 project.yml 重新產生，不進版控)
+# 各 app 的 *.xcodeproj 由 Scripts/generate_project.sh 產生
+
+# 測試結果
+TestResults/
+*.xcresult
+
+# macOS
+.DS_Store

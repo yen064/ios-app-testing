@@ -1,0 +1,79 @@
+name: TWQRAioTesting
+options:
+  bundleIdPrefix: com.aaronyen
+  deploymentTarget:
+    iOS: "16.0"
+  developmentLanguage: zh-Hant
+
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+
+targets:
+  TWQRAioTesting:
+    type: application
+    platform: iOS
+    sources:
+      - path: TWQRAioTesting
+    resources:
+      - path: TWQRAioTesting/Resources
+    info:
+      path: TWQRAioTesting/Info.plist
+      properties:
+        UILaunchStoryboardName: LaunchScreen
+        UIMainStoryboardFile: Main
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneConfigurationName: Default Configuration
+                UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
+                UISceneStoryboardFile: Main
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aaronyen.twqraiotesting
+        TARGETED_DEVICE_FAMILY: "1"
+
+  TWQRAioTestingTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: TWQRAioTestingTests
+    dependencies:
+      - target: TWQRAioTesting
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aaronyen.twqraiotesting.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+  TWQRAioTestingUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: TWQRAioTestingUITests
+    dependencies:
+      - target: TWQRAioTesting
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aaronyen.twqraiotesting.uitests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  TWQRAioTesting:
+    build:
+      targets:
+        TWQRAioTesting: all
+        TWQRAioTestingTests: [test]
+        TWQRAioTestingUITests: [test]
+    test:
+      targets:
+        - TWQRAioTestingTests
+        - TWQRAioTestingUITests
+      gatherCoverageData: true
