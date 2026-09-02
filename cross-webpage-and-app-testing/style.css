@@ -76,3 +76,16 @@ button:active {
 .hint {
   font-size: 13px;
 }
+
+.timer-label {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.timer {
+  font-size: 48px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+  margin: 0 0 8px;
+}
